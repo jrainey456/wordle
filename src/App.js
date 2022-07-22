@@ -11,16 +11,27 @@ function App() {
 
   const [guessArray, setGuessArray] = useState();
 
-  const [guess1, setGuess1] = useState("Test");
+  const [guess1, setGuess1] = useState("");
   const [guess2, setGuess2] = useState("");
   const [guess3, setGuess3] = useState("");
   const [guess4, setGuess4] = useState("");
   const [guess5, setGuess5] = useState("");
   const [guess6, setGuess6] = useState("");
 
+  function handleKeyPress(key) {
+    if (key === "DELETE" && guess1.length >= 0) {
+      setGuess1(guess1.substring(0, guess1.length - 1));
+    }
+    if (key !== "DELETE" && guess1.length < 5) {
+      setGuess1(guess1 + key);
+    }
+  }
+
+  /*
   useEffect(() => {
     setGuess1(keyboardPress);
   }, [keyboardPress]);
+*/
 
   return (
     <Container>
@@ -35,7 +46,7 @@ function App() {
       </div>
       <h4>{keyboardPress}</h4>
       <div>
-        <Keyboard setKeyboardPress={setKeyboardPress} />
+        <Keyboard handleKeyPress={handleKeyPress} />
       </div>
     </Container>
   );
