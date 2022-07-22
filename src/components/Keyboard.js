@@ -5,7 +5,6 @@ import "./Keyboard.css";
 export default function Keyboard(props) {
   function handleClick(value) {
     props.setKeyboardPress(value);
-    console.log(value);
   }
   return (
     <React.Fragment>

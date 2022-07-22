@@ -27,7 +27,7 @@ export default function GuessRow(props) {
 
   useEffect(() => {
     setLocalWord(props.word);
-  }, []);
+  }, [props.word]);
 
   return (
     <div className="wordBox">
