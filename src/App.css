@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(18, 18, 19) !important;
@@ -19,14 +19,3 @@ header {
   text-align: center;
 }
 
-.defaultCard {
-  background-color: gray !important;
-  font-size: 40px;
-}
-
-.card {
-  min-width: 100px;
-  max-width: 100px;
-  min-height: 100px;
-  max-height: 100px;
-}

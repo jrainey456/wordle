@@ -1,0 +1,16 @@
+.card {
+  background-color:  rgb(18, 18, 19) !important;
+  border-color: gray;
+  font-size: 25px;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  min-height: 70px !important;
+  max-height: 70px !important;
+  margin: 5px;
+  flex: 1;
+}
+
+.wordBox {
+  justify-content: center;
+  display: flex;
+}
