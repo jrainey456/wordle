@@ -24,7 +24,7 @@ function App() {
 
   return (
     <Container>
-      <header>Wordle</header>
+      <header>Wurdle</header>
       <div className="wordBoxContainer">
         <WordBoxRow word={guess1} />
         <WordBoxRow word={guess2} />
