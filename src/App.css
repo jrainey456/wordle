@@ -19,7 +19,7 @@ header {
   text-align: center;
 }
 
-.wordBoxContainer{
-  align-items: center;
+.wordBoxContainer {
+  min-height: 70vh;
   padding: 5%;
 }
