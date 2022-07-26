@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./WordBoxRow.css";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 export default function GuessRow(props) {
   const [letter0, setLetter0] = useState("");
@@ -9,12 +9,12 @@ export default function GuessRow(props) {
   const [letter3, setLetter3] = useState("");
   const [letter4, setLetter4] = useState("");
 
-  const [guessColorArray, setGuessArray] = useState([
-    "defaultCard",
-    "defaultCard",
-    "defaultCard",
-    "defaultCard",
-    "defaultCard",
+  const [guessColorArray, setGuessColorArray] = useState([
+    "default-card",
+    "default-card",
+    "default-card",
+    "default-card",
+    "default-card",
   ]);
 
   function checkLetter(word, index) {
@@ -34,31 +34,72 @@ export default function GuessRow(props) {
   }
 
   function setLocalColor(correctWord) {
-    if (correctWord === 1) {
-      setGuessArray([
-        "activeCard",
-        "letterCorrectCardFlip",
-        "positionCorrectCardFlip",
-        "defaultCard",
-        "defaultCard",
-      ]);
-    } else if (correctWord === 2) {
-      setGuessArray([
-        "defaultCard",
-        "defaultCard",
-        "defaultCard",
-        "defaultCard",
-        "defaultCard",
-      ]);
-    } else if (correctWord === 3) {
-      setGuessArray([
-        "defaultCard",
-        "defaultCard",
-        "defaultCard",
-        "defaultCard",
-        "defaultCard",
+    if (correctWord === 2) {
+      setGuessColorArray([
+        "default-card",
+        "default-card",
+        "default-card",
+        "default-card",
+        "default-card",
       ]);
     }
+  }
+
+  function handleShake() {
+    setGuessColorArray([
+      "default-card-shake",
+      "default-card-shake",
+      "default-card-shake",
+      "default-card-shake",
+      "default-card-shake",
+    ]);
+    setTimeout(() => {
+      setGuessColorArray([
+        "default-card",
+        "default-card",
+        "default-card",
+        "default-card",
+        "default-card",
+      ]);
+    }, 500);
+  }
+
+  function handleCorrectLetter() {
+    setGuessColorArray([
+      "letter-correct-card-flip",
+      "letter-correct-card-flip",
+      "letter-correct-card-flip",
+      "letter-correct-card-flip",
+      "letter-correct-card-flip",
+    ]);
+    setTimeout(() => {
+      setGuessColorArray([
+        "letter-correct-card",
+        "letter-correct-card",
+        "letter-correct-card",
+        "letter-correct-card",
+        "letter-correct-card",
+      ]);
+    }, 1000);
+  }
+
+  function handleCorrectPosition() {
+    setGuessColorArray([
+      "position-correct-card-flip",
+      "position-correct-card-flip",
+      "position-correct-card-flip",
+      "position-correct-card-flip",
+      "position-correct-card-flip",
+    ]);
+    setTimeout(() => {
+      setGuessColorArray([
+        "position-correct-card",
+        "position-correct-card",
+        "position-correct-card",
+        "position-correct-card",
+        "position-correct-card",
+      ]);
+    }, 1000);
   }
 
   useEffect(() => {
@@ -67,7 +108,16 @@ export default function GuessRow(props) {
   }, [props.word]);
 
   return (
-    <div className="wordBox">
+    <div className="word-box">
+      <Button variant="dark" onClick={() => handleShake()}>
+        Shake/Reset
+      </Button>
+      <Button variant="dark" onClick={() => handleCorrectLetter()}>
+        Correct Letter
+      </Button>
+      <Button variant="dark" onClick={() => handleCorrectPosition()}>
+        Correct Position
+      </Button>
       <Card id="1" className={guessColorArray[0]}>
         <Card.Body>{letter0}</Card.Body>
       </Card>
