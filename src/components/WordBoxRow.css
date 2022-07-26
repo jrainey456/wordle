@@ -8,43 +8,48 @@
   flex: 1;
 }
 
-.defaultCard {
+.default-card {
+  background-color: rgb(18, 18, 19) !important;
+  border-color: gray;
+}
+
+.default-card-shake {
   background-color: rgb(18, 18, 19) !important;
   border-color: gray;
 
   animation: horizontal-shaking normal 0.2s linear;
 }
 
-.letterCorrectCard {
-  background-color: rgb(38, 156, 33) !important;
-  border-color: gray;
-}
-
-.positionCorrectCard {
+.letter-correct-card {
   background-color: rgb(235, 220, 22) !important;
   border-color: gray;
 }
 
-.letterCorrectCardFlip {
-  background-color: rgb(38, 156, 33);
+.position-correct-card {
+  background-color: rgb(38, 156, 33)  !important;
   border-color: gray;
-  animation: flip-y-axis-green normal 1s linear;
 }
 
-.positionCorrectCardFlip {
+.letter-correct-card-flip {
   background-color: rgb(235, 220, 22);
   border-color: gray;
   animation: flip-y-axis-yellow normal 1s linear;
 }
 
-.activeCard {
+.position-correct-card-flip {
+  background-color: rgb(38, 156, 33) ;
+  border-color: gray;
+  animation: flip-y-axis-green normal 1s linear;
+}
+
+.active-card {
   background-color: rgb(42, 42, 43) !important;
   border-color: gray;
 
   animation: active-card-scale normal 0.5s linear;
 }
 
-.wordBox {
+.word-box {
   justify-content: center;
   display: flex;
 }
