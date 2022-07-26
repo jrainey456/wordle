@@ -1,6 +1,4 @@
 .card {
-  background-color:  rgb(18, 18, 19) !important;
-  border-color: gray;
   font-size: 25px;
   min-width: 70px !important;
   max-width: 70px !important;
@@ -10,7 +8,119 @@
   flex: 1;
 }
 
+.defaultCard {
+  background-color: rgb(18, 18, 19) !important;
+  border-color: gray;
+
+  animation: horizontal-shaking normal 0.2s linear;
+}
+
+.letterCorrectCard {
+  background-color: rgb(38, 156, 33) !important;
+  border-color: gray;
+}
+
+.positionCorrectCard {
+  background-color: rgb(235, 220, 22) !important;
+  border-color: gray;
+}
+
+.letterCorrectCardFlip {
+  background-color: rgb(38, 156, 33);
+  border-color: gray;
+  animation: flip-y-axis-green normal 1s linear;
+}
+
+.positionCorrectCardFlip {
+  background-color: rgb(235, 220, 22);
+  border-color: gray;
+  animation: flip-y-axis-yellow normal 1s linear;
+}
+
+.activeCard {
+  background-color: rgb(42, 42, 43) !important;
+  border-color: gray;
+
+  animation: active-card-scale normal 0.5s linear;
+}
+
 .wordBox {
   justify-content: center;
   display: flex;
+}
+
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes flip-y-axis-yellow {
+  0% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(0deg);
+  }
+  25% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(0deg);
+  }
+  50% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(90deg);
+  }
+  75% {
+    background-color: rgb(235, 220, 22);
+    transform: rotateX(0deg);
+  }
+  100% {
+    background-color: rgb(235, 220, 22);
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes flip-y-axis-green {
+  0% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(0deg);
+  }
+  25% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(0deg);
+  }
+  50% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(90deg);
+  }
+  75% {
+    background-color: rgb(38, 156, 33);
+    transform: rotateX(0deg);
+  }
+  100% {
+    background-color: rgb(38, 156, 33);
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes active-card-scale {
+  0% {
+    transform: scale(1);
+    transform-origin: center center;
+  }
+
+  100% {
+    animation-timing-function: ease-out;
+    transform: scale(1.05);
+  }
 }

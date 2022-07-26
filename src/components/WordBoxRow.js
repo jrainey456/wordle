@@ -9,6 +9,14 @@ export default function GuessRow(props) {
   const [letter3, setLetter3] = useState("");
   const [letter4, setLetter4] = useState("");
 
+  const [guessColorArray, setGuessArray] = useState([
+    "defaultCard",
+    "defaultCard",
+    "defaultCard",
+    "defaultCard",
+    "defaultCard",
+  ]);
+
   function checkLetter(word, index) {
     if (typeof word[index] === "undefined") {
       return "";
@@ -25,25 +33,54 @@ export default function GuessRow(props) {
     setLetter4(checkLetter(word, 4));
   }
 
+  function setLocalColor(correctWord) {
+    if (correctWord === 1) {
+      setGuessArray([
+        "activeCard",
+        "letterCorrectCardFlip",
+        "positionCorrectCardFlip",
+        "defaultCard",
+        "defaultCard",
+      ]);
+    } else if (correctWord === 2) {
+      setGuessArray([
+        "defaultCard",
+        "defaultCard",
+        "defaultCard",
+        "defaultCard",
+        "defaultCard",
+      ]);
+    } else if (correctWord === 3) {
+      setGuessArray([
+        "defaultCard",
+        "defaultCard",
+        "defaultCard",
+        "defaultCard",
+        "defaultCard",
+      ]);
+    }
+  }
+
   useEffect(() => {
     setLocalWord(props.word);
+    setLocalColor(props.guessNumber);
   }, [props.word]);
 
   return (
     <div className="wordBox">
-      <Card id="1" className="defaultCard">
+      <Card id="1" className={guessColorArray[0]}>
         <Card.Body>{letter0}</Card.Body>
       </Card>
-      <Card id="2" className="defaultCard">
+      <Card id="2" className={guessColorArray[1]}>
         <Card.Body>{letter1}</Card.Body>
       </Card>
-      <Card id="3" className="defaultCard">
+      <Card id="3" className={guessColorArray[2]}>
         <Card.Body>{letter2}</Card.Body>
       </Card>
-      <Card id="4" className="defaultCard">
+      <Card id="4" className={guessColorArray[3]}>
         <Card.Body>{letter3}</Card.Body>
       </Card>
-      <Card id="5" className="defaultCard">
+      <Card id="5" className={guessColorArray[4]}>
         <Card.Body>{letter4}</Card.Body>
       </Card>
     </div>

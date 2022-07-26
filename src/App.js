@@ -1,52 +1,72 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import WordBoxRow from "./components/WordBoxRow";
 import Keyboard from "./components/Keyboard";
 
 function App() {
-  const [keyboardPress, setKeyboardPress] = useState("");
+  // const [keyboardPress, setKeyboardPress] = useState("");
   const [activeRow, setActiveRow] = useState(0);
 
-  const [guessArray, setGuessArray] = useState();
+  const [guessArray, setGuessArray] = useState(["", "", "", "", "", ""]);
 
-  const [guess1, setGuess1] = useState("");
-  const [guess2, setGuess2] = useState("");
-  const [guess3, setGuess3] = useState("");
-  const [guess4, setGuess4] = useState("");
-  const [guess5, setGuess5] = useState("");
-  const [guess6, setGuess6] = useState("");
+  function updateGuessArray(word, index) {
+    var array = [];
 
-  function handleKeyPress(key) {
-    if (key === "DELETE" && guess1.length >= 0) {
-      setGuess1(guess1.substring(0, guess1.length - 1));
-    }
-    if (key !== "DELETE" && guess1.length < 5) {
-      setGuess1(guess1 + key);
-    }
+    guessArray.map((data) => {
+      array.push(data);
+    });
+
+    array[index] = word;
+    setGuessArray(array);
   }
 
-  /*
-  useEffect(() => {
-    setGuess1(keyboardPress);
-  }, [keyboardPress]);
-*/
+  function handleKeyPress(key, keyCode) {
+    console.log("--------------------------------------");
+    console.log(guessArray[activeRow].length);
+    console.log("Keypress is: " + key);
+    console.log("KeyCode is: " + keyCode);
+    console.log("Array is :" + guessArray[activeRow]);
+    console.log("Combined :" + guessArray[activeRow] + key);
+    if (key === "ENTER") {
+      if (
+        activeRow < guessArray.length - 1 &&
+        guessArray[activeRow].length === 5
+      ) {
+        setActiveRow(activeRow + 1);
+      }
+    } else if (key === "BACKSPACE" && guessArray[activeRow].length >= 0) {
+      updateGuessArray(
+        guessArray[activeRow].substring(0, guessArray[activeRow].length - 1),
+        activeRow
+      );
+    } else if (
+      key !== "BACKSPACE" &&
+      guessArray[activeRow].length < 5 &&
+      (keyCode === "onScreen" || (keyCode >= 65 && keyCode <= 90))
+    ) {
+      updateGuessArray(guessArray[activeRow] + key, activeRow);
+    }
+  }
 
   return (
     <Container>
       <header>Wurdle</header>
       <div className="wordBoxContainer">
-        <WordBoxRow word={guess1} />
-        <WordBoxRow word={guess2} />
-        <WordBoxRow word={guess3} />
-        <WordBoxRow word={guess4} />
-        <WordBoxRow word={guess5} />
-        <WordBoxRow word={guess6} />
+        <WordBoxRow word={guessArray[0]} guessNumber={1} />
+        <WordBoxRow word={guessArray[1]} guessNumber={2} />
+        <WordBoxRow word={guessArray[2]} guessNumber={3} />
+        <WordBoxRow word={guessArray[3]} guessNumber={4} />
+        <WordBoxRow word={guessArray[4]} guessNumber={5} />
+        <WordBoxRow word={guessArray[5]} guessNumber={6} />
       </div>
-      <h4>{keyboardPress}</h4>
       <div>
-        <Keyboard handleKeyPress={handleKeyPress} />
+        <Keyboard
+          handleKeyPress={handleKeyPress}
+          guessArray={guessArray}
+          activeRow={activeRow}
+        />
       </div>
     </Container>
   );
