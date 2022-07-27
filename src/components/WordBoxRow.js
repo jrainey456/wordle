@@ -9,12 +9,28 @@ export default function GuessRow(props) {
   const [letter3, setLetter3] = useState("");
   const [letter4, setLetter4] = useState("");
 
-  const [guessColorArray, setGuessColorArray] = useState([
+  const [currentColorArray, setCurrentColorArray] = useState([
     "default-card",
     "default-card",
     "default-card",
     "default-card",
     "default-card",
+  ]);
+
+  const [animationClassArray, setAnimationClassArray] = useState([
+    "letter-correct-card-flip",
+    "position-correct-card-flip",
+    "letter-correct-card-flip",
+    "letter-correct-card-flip",
+    "letter-correct-card-flip",
+  ]);
+
+  const [endClassArray, setEndClassArray] = useState([
+    "letter-correct-card",
+    "position-correct-card",
+    "letter-correct-card",
+    "letter-correct-card",
+    "letter-correct-card",
   ]);
 
   function checkLetter(word, index) {
@@ -35,7 +51,7 @@ export default function GuessRow(props) {
 
   function setLocalColor(correctWord) {
     if (correctWord === 2) {
-      setGuessColorArray([
+      setCurrentColorArray([
         "default-card",
         "default-card",
         "default-card",
@@ -46,7 +62,7 @@ export default function GuessRow(props) {
   }
 
   function handleShake() {
-    setGuessColorArray([
+    setCurrentColorArray([
       "default-card-shake",
       "default-card-shake",
       "default-card-shake",
@@ -54,7 +70,7 @@ export default function GuessRow(props) {
       "default-card-shake",
     ]);
     setTimeout(() => {
-      setGuessColorArray([
+      setCurrentColorArray([
         "default-card",
         "default-card",
         "default-card",
@@ -63,9 +79,83 @@ export default function GuessRow(props) {
       ]);
     }, 500);
   }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  function checkWord() {
+    console.log("Word Checked: " + props.word);
+    console.log("Correct Word: " + props.correctWord);
+
+    var localAnimationArray = [
+      "default-card",
+      "default-card",
+      "default-card",
+      "default-card",
+      "default-card",
+    ];
+    var localEndArray = [
+      "default-card",
+      "default-card",
+      "default-card",
+      "default-card",
+      "default-card",
+    ];
+
+    for (var i = 0; i < props.correctWord.length; i++) {
+      if (props.word === "" || props.word.length === 5) {
+        if (props.word[i] === props.correctWord[i]) {
+          localAnimationArray[i] = "position-correct-card-flip";
+          localEndArray[i] = "position-correct-card";
+        }
+      }
+    }
+    setAnimationClassArray(localAnimationArray);
+    setEndClassArray(localEndArray);
+  }
+
+  function startAnimation(array, index) {
+    var localArray = [];
+    var localAnimationClass = [];
+    var localEndClass = [];
+
+    var delay = 0;
+
+    if (index !== 0) {
+      delay = 500;
+    }
+
+    array.map((data) => {
+      localArray.push(data);
+    });
+
+    animationClassArray.map((data) => {
+      localAnimationClass.push(data);
+    });
+
+    endClassArray.map((data) => {
+      localEndClass.push(data);
+    });
+
+    localArray[index] = localAnimationClass[index];
+
+    if (index < array.length) {
+      setTimeout(() => {
+        setCurrentColorArray(localArray, startAnimation(localArray, index + 1));
+      }, delay);
+    } else {
+      setTimeout(() => {
+        setCurrentColorArray(localEndClass);
+      }, delay + delay);
+    }
+    //  setCurrentColorArray([endClass, endClass, endClass, endClass, endClass]);
+  }
+
+  function handleSubmit() {
+    checkWord();
+    startAnimation(currentColorArray, 0);
+  }
 
   function handleCorrectLetter() {
-    setGuessColorArray([
+    setCurrentColorArray([
       "letter-correct-card-flip",
       "letter-correct-card-flip",
       "letter-correct-card-flip",
@@ -73,7 +163,7 @@ export default function GuessRow(props) {
       "letter-correct-card-flip",
     ]);
     setTimeout(() => {
-      setGuessColorArray([
+      setCurrentColorArray([
         "letter-correct-card",
         "letter-correct-card",
         "letter-correct-card",
@@ -84,7 +174,7 @@ export default function GuessRow(props) {
   }
 
   function handleCorrectPosition() {
-    setGuessColorArray([
+    setCurrentColorArray([
       "position-correct-card-flip",
       "position-correct-card-flip",
       "position-correct-card-flip",
@@ -92,7 +182,7 @@ export default function GuessRow(props) {
       "position-correct-card-flip",
     ]);
     setTimeout(() => {
-      setGuessColorArray([
+      setCurrentColorArray([
         "position-correct-card",
         "position-correct-card",
         "position-correct-card",
@@ -118,19 +208,22 @@ export default function GuessRow(props) {
       <Button variant="dark" onClick={() => handleCorrectPosition()}>
         Correct Position
       </Button>
-      <Card id="1" className={guessColorArray[0]}>
+      <Button variant="dark" onClick={() => handleSubmit()}>
+        Submit
+      </Button>
+      <Card id="1" className={currentColorArray[0]}>
         <Card.Body>{letter0}</Card.Body>
       </Card>
-      <Card id="2" className={guessColorArray[1]}>
+      <Card id="2" className={currentColorArray[1]}>
         <Card.Body>{letter1}</Card.Body>
       </Card>
-      <Card id="3" className={guessColorArray[2]}>
+      <Card id="3" className={currentColorArray[2]}>
         <Card.Body>{letter2}</Card.Body>
       </Card>
-      <Card id="4" className={guessColorArray[3]}>
+      <Card id="4" className={currentColorArray[3]}>
         <Card.Body>{letter3}</Card.Body>
       </Card>
-      <Card id="5" className={guessColorArray[4]}>
+      <Card id="5" className={currentColorArray[4]}>
         <Card.Body>{letter4}</Card.Body>
       </Card>
     </div>

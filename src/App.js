@@ -7,6 +7,8 @@ import Keyboard from "./components/Keyboard";
 
 function App() {
   // const [keyboardPress, setKeyboardPress] = useState("");
+  const [correctWord, setCorrectWord] = useState("TOAST");
+
   const [activeRow, setActiveRow] = useState(0);
 
   const [guessArray, setGuessArray] = useState(["", "", "", "", "", ""]);
@@ -54,12 +56,36 @@ function App() {
     <Container>
       <header>Wurdle</header>
       <div className="wordBoxContainer">
-        <WordBoxRow word={guessArray[0]} guessNumber={1} />
-        <WordBoxRow word={guessArray[1]} guessNumber={2} />
-        <WordBoxRow word={guessArray[2]} guessNumber={3} />
-        <WordBoxRow word={guessArray[3]} guessNumber={4} />
-        <WordBoxRow word={guessArray[4]} guessNumber={5} />
-        <WordBoxRow word={guessArray[5]} guessNumber={6} />
+        <WordBoxRow
+          word={guessArray[0]}
+          correctWord={correctWord}
+          guessNumber={1}
+        />
+        <WordBoxRow
+          word={guessArray[1]}
+          correctWord={correctWord}
+          guessNumber={2}
+        />
+        <WordBoxRow
+          word={guessArray[2]}
+          correctWord={correctWord}
+          guessNumber={3}
+        />
+        <WordBoxRow
+          word={guessArray[3]}
+          correctWord={correctWord}
+          guessNumber={4}
+        />
+        <WordBoxRow
+          word={guessArray[4]}
+          correctWord={correctWord}
+          guessNumber={5}
+        />
+        <WordBoxRow
+          word={guessArray[5]}
+          correctWord={correctWord}
+          guessNumber={6}
+        />
       </div>
       <div>
         <Keyboard
