@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import WordBoxRow from "./components/WordBoxRow";
 import Keyboard from "./components/Keyboard";
+import Header from "./components/Header";
 
 function App() {
   // const [keyboardPress, setKeyboardPress] = useState("");
@@ -53,48 +54,50 @@ function App() {
   }
 
   return (
-    <Container>
-      <header>Rainy Day Wordle</header>
-      <div className="wordBoxContainer">
-        <WordBoxRow
-          word={guessArray[0]}
-          correctWord={correctWord}
-          guessNumber={1}
-        />
-        <WordBoxRow
-          word={guessArray[1]}
-          correctWord={correctWord}
-          guessNumber={2}
-        />
-        <WordBoxRow
-          word={guessArray[2]}
-          correctWord={correctWord}
-          guessNumber={3}
-        />
-        <WordBoxRow
-          word={guessArray[3]}
-          correctWord={correctWord}
-          guessNumber={4}
-        />
-        <WordBoxRow
-          word={guessArray[4]}
-          correctWord={correctWord}
-          guessNumber={5}
-        />
-        <WordBoxRow
-          word={guessArray[5]}
-          correctWord={correctWord}
-          guessNumber={6}
-        />
-      </div>
-      <div>
-        <Keyboard
-          handleKeyPress={handleKeyPress}
-          guessArray={guessArray}
-          activeRow={activeRow}
-        />
-      </div>
-    </Container>
+    <React.Fragment>
+      <Header />
+      <Container>
+        <div className="wordBoxContainer">
+          <WordBoxRow
+            word={guessArray[0]}
+            correctWord={correctWord}
+            guessNumber={1}
+          />
+          <WordBoxRow
+            word={guessArray[1]}
+            correctWord={correctWord}
+            guessNumber={2}
+          />
+          <WordBoxRow
+            word={guessArray[2]}
+            correctWord={correctWord}
+            guessNumber={3}
+          />
+          <WordBoxRow
+            word={guessArray[3]}
+            correctWord={correctWord}
+            guessNumber={4}
+          />
+          <WordBoxRow
+            word={guessArray[4]}
+            correctWord={correctWord}
+            guessNumber={5}
+          />
+          <WordBoxRow
+            word={guessArray[5]}
+            correctWord={correctWord}
+            guessNumber={6}
+          />
+        </div>
+        <div>
+          <Keyboard
+            handleKeyPress={handleKeyPress}
+            guessArray={guessArray}
+            activeRow={activeRow}
+          />
+        </div>
+      </Container>
+    </React.Fragment>
   );
 }
 

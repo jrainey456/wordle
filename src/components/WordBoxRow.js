@@ -174,7 +174,7 @@ export default function GuessRow(props) {
     checkWord();
     startAnimation(currentColorArray, 0);
   }
-/*
+  /*
   function handleCorrectLetter() {
     setCurrentColorArray([
       "letter-correct-card-flip",

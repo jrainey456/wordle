@@ -1,4 +1,8 @@
 body {
+  background-image: url("assets/smoke.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

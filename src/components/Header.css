@@ -1,0 +1,10 @@
+.container{
+    justify-content: center !important;
+}
+
+.headerDark{
+    background-color: black !important;
+    min-height: 70px;
+    justify-content: center;
+    text-align: center;
+}
