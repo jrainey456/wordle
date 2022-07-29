@@ -89,7 +89,7 @@ function App() {
             guessNumber={6}
           />
         </div>
-        <div>
+        <div className="keyboardContainer">
           <Keyboard
             handleKeyPress={handleKeyPress}
             guessArray={guessArray}

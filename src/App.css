@@ -27,3 +27,7 @@ header {
   min-height: 70vh;
   padding: 5%;
 }
+
+.keyboardContainer {
+  min-height: 20vh;
+}
