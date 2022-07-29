@@ -26,7 +26,12 @@
 }
 
 .position-correct-card {
-  background-color: rgb(38, 156, 33)  !important;
+  background-color: rgb(38, 156, 33) !important;
+  border-color: gray;
+}
+
+.incorrect-card {
+  background-color: rgb(42, 42, 43) !important;
   border-color: gray;
 }
 
@@ -37,9 +42,20 @@
 }
 
 .position-correct-card-flip {
-  background-color: rgb(38, 156, 33) ;
+  background-color: rgb(38, 156, 33);
   border-color: gray;
   animation: flip-y-axis-green normal 1s linear;
+}
+
+.incorrect-card {
+  background-color: rgb(42, 42, 43);
+  border-color: gray;
+}
+
+.incorrect-card-flip {
+  background-color: rgb(42, 42, 43);
+  border-color: gray;
+  animation: flip-y-axis-grey normal 1s linear;
 }
 
 .active-card {
@@ -114,6 +130,29 @@
   }
   100% {
     background-color: rgb(38, 156, 33);
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes flip-y-axis-grey {
+  0% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(0deg);
+  }
+  25% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(0deg);
+  }
+  50% {
+    background-color: rgb(18, 18, 19);
+    transform: rotateX(90deg);
+  }
+  75% {
+    background-color: rgb(42, 42, 43);
+    transform: rotateX(0deg);
+  }
+  100% {
+    background-color: rgb(42, 42, 43);
     transform: rotateX(0deg);
   }
 }

@@ -7,7 +7,7 @@ import Keyboard from "./components/Keyboard";
 
 function App() {
   // const [keyboardPress, setKeyboardPress] = useState("");
-  const [correctWord, setCorrectWord] = useState("TOAST");
+  const [correctWord, setCorrectWord] = useState("AUDIO");
 
   const [activeRow, setActiveRow] = useState(0);
 
@@ -54,7 +54,7 @@ function App() {
 
   return (
     <Container>
-      <header>Wurdle</header>
+      <header>Rainy Day Wordle</header>
       <div className="wordBoxContainer">
         <WordBoxRow
           word={guessArray[0]}

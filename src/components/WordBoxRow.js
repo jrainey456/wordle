@@ -16,22 +16,41 @@ export default function GuessRow(props) {
     "default-card",
     "default-card",
   ]);
-
+  /*
   const [animationClassArray, setAnimationClassArray] = useState([
-    "letter-correct-card-flip",
-    "position-correct-card-flip",
-    "letter-correct-card-flip",
-    "letter-correct-card-flip",
-    "letter-correct-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
   ]);
+*/
 
+  var animationClassArray = [
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+  ];
+
+  /*
   const [endClassArray, setEndClassArray] = useState([
-    "letter-correct-card",
-    "position-correct-card",
-    "letter-correct-card",
-    "letter-correct-card",
-    "letter-correct-card",
+    "incorrect-card",
+    "incorrect-card",
+    "incorrect-card",
+    "incorrect-card",
+    "incorrect-card",
   ]);
+*/
+
+  var endClassArray = [
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+    "incorrect-card-flip",
+  ];
 
   function checkLetter(word, index) {
     if (typeof word[index] === "undefined") {
@@ -108,8 +127,10 @@ export default function GuessRow(props) {
         }
       }
     }
-    setAnimationClassArray(localAnimationArray);
-    setEndClassArray(localEndArray);
+    //setAnimationClassArray(localAnimationArray);
+    animationClassArray = localAnimationArray;
+    //setEndClassArray(localEndArray);
+    endClassArray = localEndArray;
   }
 
   function startAnimation(array, index) {
@@ -153,7 +174,7 @@ export default function GuessRow(props) {
     checkWord();
     startAnimation(currentColorArray, 0);
   }
-
+/*
   function handleCorrectLetter() {
     setCurrentColorArray([
       "letter-correct-card-flip",
@@ -191,7 +212,7 @@ export default function GuessRow(props) {
       ]);
     }, 1000);
   }
-
+*/
   useEffect(() => {
     setLocalWord(props.word);
     setLocalColor(props.guessNumber);
@@ -201,12 +222,6 @@ export default function GuessRow(props) {
     <div className="word-box">
       <Button variant="dark" onClick={() => handleShake()}>
         Shake/Reset
-      </Button>
-      <Button variant="dark" onClick={() => handleCorrectLetter()}>
-        Correct Letter
-      </Button>
-      <Button variant="dark" onClick={() => handleCorrectPosition()}>
-        Correct Position
       </Button>
       <Button variant="dark" onClick={() => handleSubmit()}>
         Submit
