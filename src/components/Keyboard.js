@@ -18,7 +18,7 @@ export default function Keyboard(props) {
 
   return (
     <React.Fragment>
-      <div>
+      <span className="keyboardRow">
         <Button
           value="Q"
           variant="dark"
@@ -89,7 +89,7 @@ export default function Keyboard(props) {
         >
           P
         </Button>
-      </div>
+      </span>
       <div>
         <Button
           value="A"

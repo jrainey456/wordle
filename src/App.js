@@ -49,6 +49,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    document.title = "Rainy Day Development";
+  }, []);
+
   return (
     <React.Fragment>
       <Header />

@@ -10,8 +10,7 @@ export default function Header() {
       <Container>
         <Navbar.Brand>
           <FontAwesomeIcon icon={faCloudMoonRain} size="2x" />
-          {"   "} Rainy Day
-        
+          {"   "} Rainy Day Development
         </Navbar.Brand>
       </Container>
     </Navbar>
