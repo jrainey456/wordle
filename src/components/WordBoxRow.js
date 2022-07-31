@@ -16,15 +16,6 @@ export default function GuessRow(props) {
     "default-card",
     "default-card",
   ]);
-  /*
-  const [animationClassArray, setAnimationClassArray] = useState([
-    "incorrect-card-flip",
-    "incorrect-card-flip",
-    "incorrect-card-flip",
-    "incorrect-card-flip",
-    "incorrect-card-flip",
-  ]);
-*/
 
   var animationClassArray = [
     "incorrect-card-flip",
@@ -33,16 +24,6 @@ export default function GuessRow(props) {
     "incorrect-card-flip",
     "incorrect-card-flip",
   ];
-
-  /*
-  const [endClassArray, setEndClassArray] = useState([
-    "incorrect-card",
-    "incorrect-card",
-    "incorrect-card",
-    "incorrect-card",
-    "incorrect-card",
-  ]);
-*/
 
   var endClassArray = [
     "incorrect-card-flip",
@@ -120,16 +101,20 @@ export default function GuessRow(props) {
     ];
 
     for (var i = 0; i < props.correctWord.length; i++) {
-      if (props.word === "" || props.word.length === 5) {
+      if (props.word !== "" && props.word.length === 5) {
         if (props.word[i] === props.correctWord[i]) {
           localAnimationArray[i] = "position-correct-card-flip";
           localEndArray[i] = "position-correct-card";
+        } else if (props.correctWord.includes(props.word[i])) {
+          localAnimationArray[i] = "letter-correct-card-flip";
+          localEndArray[i] = "letter-correct-card";
+        } else {
+          localAnimationArray[i] = "incorrect-card-flip";
+          localEndArray[i] = "incorrect-card";
         }
       }
     }
-    //setAnimationClassArray(localAnimationArray);
     animationClassArray = localAnimationArray;
-    //setEndClassArray(localEndArray);
     endClassArray = localEndArray;
   }
 
@@ -167,65 +152,26 @@ export default function GuessRow(props) {
         setCurrentColorArray(localEndClass);
       }, delay + delay);
     }
-    //  setCurrentColorArray([endClass, endClass, endClass, endClass, endClass]);
   }
 
   function handleSubmit() {
     checkWord();
     startAnimation(currentColorArray, 0);
   }
-  /*
-  function handleCorrectLetter() {
-    setCurrentColorArray([
-      "letter-correct-card-flip",
-      "letter-correct-card-flip",
-      "letter-correct-card-flip",
-      "letter-correct-card-flip",
-      "letter-correct-card-flip",
-    ]);
-    setTimeout(() => {
-      setCurrentColorArray([
-        "letter-correct-card",
-        "letter-correct-card",
-        "letter-correct-card",
-        "letter-correct-card",
-        "letter-correct-card",
-      ]);
-    }, 1000);
-  }
 
-  function handleCorrectPosition() {
-    setCurrentColorArray([
-      "position-correct-card-flip",
-      "position-correct-card-flip",
-      "position-correct-card-flip",
-      "position-correct-card-flip",
-      "position-correct-card-flip",
-    ]);
-    setTimeout(() => {
-      setCurrentColorArray([
-        "position-correct-card",
-        "position-correct-card",
-        "position-correct-card",
-        "position-correct-card",
-        "position-correct-card",
-      ]);
-    }, 1000);
-  }
-*/
   useEffect(() => {
     setLocalWord(props.word);
-    setLocalColor(props.guessNumber);
+    // setLocalColor(props.guessNumber);
   }, [props.word]);
+
+  useEffect(() => {
+    if (props.activeRow === props.row + 1) {
+      handleSubmit();
+    }
+  }, [props.activeRow]);
 
   return (
     <div className="word-box">
-      <Button variant="dark" onClick={() => handleShake()}>
-        Shake/Reset
-      </Button>
-      <Button variant="dark" onClick={() => handleSubmit()}>
-        Submit
-      </Button>
       <Card id="1" className={currentColorArray[0]}>
         <Card.Body>{letter0}</Card.Body>
       </Card>
@@ -244,3 +190,12 @@ export default function GuessRow(props) {
     </div>
   );
 }
+
+/*
+      <Button variant="dark" onClick={() => handleShake()}>
+        Shake/Reset
+      </Button>
+      <Button variant="dark" onClick={() => handleSubmit()}>
+        Submit
+      </Button>
+*/

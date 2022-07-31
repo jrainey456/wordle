@@ -10,7 +10,7 @@ export default function Header() {
       <Container>
         <Navbar.Brand>
           <FontAwesomeIcon icon={faCloudMoonRain} size="2x" />
-          {"   "} Rainy Day Wordle
+          {"   "} Rainy Day
         
         </Navbar.Brand>
       </Container>

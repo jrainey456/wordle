@@ -7,7 +7,6 @@ import Keyboard from "./components/Keyboard";
 import Header from "./components/Header";
 
 function App() {
-  // const [keyboardPress, setKeyboardPress] = useState("");
   const [correctWord, setCorrectWord] = useState("AUDIO");
 
   const [activeRow, setActiveRow] = useState(0);
@@ -33,10 +32,7 @@ function App() {
     console.log("Array is :" + guessArray[activeRow]);
     console.log("Combined :" + guessArray[activeRow] + key);
     if (key === "ENTER") {
-      if (
-        activeRow < guessArray.length - 1 &&
-        guessArray[activeRow].length === 5
-      ) {
+      if (activeRow < guessArray.length && guessArray[activeRow].length === 5) {
         setActiveRow(activeRow + 1);
       }
     } else if (key === "BACKSPACE" && guessArray[activeRow].length >= 0) {
@@ -59,34 +55,40 @@ function App() {
       <Container>
         <div className="wordBoxContainer">
           <WordBoxRow
+            row={0}
             word={guessArray[0]}
             correctWord={correctWord}
-            guessNumber={1}
+            activeRow={activeRow}
           />
           <WordBoxRow
+            row={1}
             word={guessArray[1]}
             correctWord={correctWord}
-            guessNumber={2}
+            activeRow={activeRow}
           />
           <WordBoxRow
+            row={2}
             word={guessArray[2]}
             correctWord={correctWord}
-            guessNumber={3}
+            activeRow={activeRow}
           />
           <WordBoxRow
+            row={3}
             word={guessArray[3]}
             correctWord={correctWord}
-            guessNumber={4}
+            activeRow={activeRow}
           />
           <WordBoxRow
+            row={4}
             word={guessArray[4]}
             correctWord={correctWord}
-            guessNumber={5}
+            activeRow={activeRow}
           />
           <WordBoxRow
+            row={5}
             word={guessArray[5]}
             correctWord={correctWord}
-            guessNumber={6}
+            activeRow={activeRow}
           />
         </div>
         <div className="keyboardContainer">
