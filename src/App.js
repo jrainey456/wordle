@@ -7,18 +7,14 @@ import Keyboard from "./components/Keyboard";
 import Header from "./components/Header";
 
 function App() {
-  const [correctWord, setCorrectWord] = useState("AUDIO");
+  const [correctWord] = useState("AUDIO");
 
   const [activeRow, setActiveRow] = useState(0);
 
   const [guessArray, setGuessArray] = useState(["", "", "", "", "", ""]);
 
   function updateGuessArray(word, index) {
-    var array = [];
-
-    guessArray.map((data) => {
-      array.push(data);
-    });
+    const array = [...guessArray];
 
     array[index] = word;
     setGuessArray(array);

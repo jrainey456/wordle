@@ -1,20 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Button } from "react-bootstrap";
 import "./Keyboard.css";
 
 export default function Keyboard(props) {
+  /* eslint-disable react-hooks/exhaustive-deps */
+  const handleClick = useCallback(
+    (value, code) => {
+      props.handleKeyPress(value, code);
+    },
+    [props.handleKeyPress]
+  );
+
+  const detectKeyDown = useCallback(
+    (e) => {
+      handleClick(e.key.toUpperCase(), e.keyCode);
+    },
+    [handleClick]
+  );
+
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);
     return () => document.removeEventListener("keydown", detectKeyDown, true);
-  }, [props.guessArray, props.activeRow]);
-
-  function detectKeyDown(e) {
-    handleClick(e.key.toUpperCase(), e.keyCode);
-  }
-
-  function handleClick(value, code) {
-    props.handleKeyPress(value, code);
-  }
+  }, [detectKeyDown]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <React.Fragment>

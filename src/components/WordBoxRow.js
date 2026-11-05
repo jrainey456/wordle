@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./WordBoxRow.css";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function GuessRow(props) {
   const [letter0, setLetter0] = useState("");
@@ -17,21 +17,21 @@ export default function GuessRow(props) {
     "default-card",
   ]);
 
-  var animationClassArray = [
+  const animationClassArrayRef = useRef([
     "incorrect-card-flip",
     "incorrect-card-flip",
     "incorrect-card-flip",
     "incorrect-card-flip",
     "incorrect-card-flip",
-  ];
+  ]);
 
-  var endClassArray = [
+  const endClassArrayRef = useRef([
     "incorrect-card-flip",
     "incorrect-card-flip",
     "incorrect-card-flip",
     "incorrect-card-flip",
     "incorrect-card-flip",
-  ];
+  ]);
 
   function checkLetter(word, index) {
     if (typeof word[index] === "undefined") {
@@ -41,47 +41,18 @@ export default function GuessRow(props) {
     }
   }
 
-  function setLocalWord(word) {
-    setLetter0(checkLetter(word, 0));
-    setLetter1(checkLetter(word, 1));
-    setLetter2(checkLetter(word, 2));
-    setLetter3(checkLetter(word, 3));
-    setLetter4(checkLetter(word, 4));
-  }
+  const setLocalWord = useCallback(
+    (word) => {
+      setLetter0(checkLetter(word, 0));
+      setLetter1(checkLetter(word, 1));
+      setLetter2(checkLetter(word, 2));
+      setLetter3(checkLetter(word, 3));
+      setLetter4(checkLetter(word, 4));
+    },
+    []
+  );
 
-  function setLocalColor(correctWord) {
-    if (correctWord === 2) {
-      setCurrentColorArray([
-        "default-card",
-        "default-card",
-        "default-card",
-        "default-card",
-        "default-card",
-      ]);
-    }
-  }
-
-  function handleShake() {
-    setCurrentColorArray([
-      "default-card-shake",
-      "default-card-shake",
-      "default-card-shake",
-      "default-card-shake",
-      "default-card-shake",
-    ]);
-    setTimeout(() => {
-      setCurrentColorArray([
-        "default-card",
-        "default-card",
-        "default-card",
-        "default-card",
-        "default-card",
-      ]);
-    }, 500);
-  }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  function checkWord() {
+  const checkWord = useCallback(() => {
     console.log("Word Checked: " + props.word);
     console.log("Correct Word: " + props.correctWord);
 
@@ -114,61 +85,69 @@ export default function GuessRow(props) {
         }
       }
     }
-    animationClassArray = localAnimationArray;
-    endClassArray = localEndArray;
-  }
+    animationClassArrayRef.current = localAnimationArray;
+    endClassArrayRef.current = localEndArray;
+  }, [props.word, props.correctWord]);
 
-  function startAnimation(array, index) {
-    var localArray = [];
-    var localAnimationClass = [];
-    var localEndClass = [];
+  const currentColorArrayRef = useRef(currentColorArray);
 
-    var delay = 0;
+  useEffect(() => {
+    currentColorArrayRef.current = currentColorArray;
+  }, [currentColorArray]);
 
-    if (index !== 0) {
-      delay = 500;
-    }
+  const startAnimation = useCallback(
+    (array, index) => {
+      var localArray = [];
+      var localAnimationClass = [];
+      var localEndClass = [];
 
-    array.map((data) => {
-      localArray.push(data);
-    });
+      var delay = 0;
 
-    animationClassArray.map((data) => {
-      localAnimationClass.push(data);
-    });
+      if (index !== 0) {
+        delay = 500;
+      }
 
-    endClassArray.map((data) => {
-      localEndClass.push(data);
-    });
+      array.forEach((data) => {
+        localArray.push(data);
+      });
 
-    localArray[index] = localAnimationClass[index];
+      animationClassArrayRef.current.forEach((data) => {
+        localAnimationClass.push(data);
+      });
 
-    if (index < array.length) {
-      setTimeout(() => {
-        setCurrentColorArray(localArray, startAnimation(localArray, index + 1));
-      }, delay);
-    } else {
-      setTimeout(() => {
-        setCurrentColorArray(localEndClass);
-      }, delay + delay);
-    }
-  }
+      endClassArrayRef.current.forEach((data) => {
+        localEndClass.push(data);
+      });
 
-  function handleSubmit() {
+      localArray[index] = localAnimationClass[index];
+
+      if (index < array.length) {
+        setTimeout(() => {
+          setCurrentColorArray(localArray, startAnimation(localArray, index + 1));
+        }, delay);
+      } else {
+        setTimeout(() => {
+          setCurrentColorArray(localEndClass);
+        }, delay + delay);
+      }
+    },
+    []
+  );
+
+  const handleSubmit = useCallback(() => {
     checkWord();
-    startAnimation(currentColorArray, 0);
-  }
+    startAnimation(currentColorArrayRef.current, 0);
+  }, [checkWord, startAnimation]);
 
   useEffect(() => {
     setLocalWord(props.word);
-    // setLocalColor(props.guessNumber);
-  }, [props.word]);
+  }, [props.word, setLocalWord]);
 
   useEffect(() => {
     if (props.activeRow === props.row + 1) {
       handleSubmit();
     }
-  }, [props.activeRow]);
+  }, [props.activeRow, props.row, handleSubmit]);
 
   return (
     <div className="word-box">
